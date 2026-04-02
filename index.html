@@ -323,15 +323,12 @@ function showResult() {
 
   let headline, match, matchWidth;
 
-  if (totalScore >= 7) {
+  if (totalScore >= 5) {
     headline = "אתה בדיוק בנקודה הנכונה לטפל בזה";
-    match = "גבוה מאוד"; matchWidth = "95%";
-  } else if (totalScore >= 4) {
-    headline = "יש סיכוי טוב שהפורמולה שלנו תעבוד בשבילך";
-    match = "גבוה"; matchWidth = "78%";
+    match = "גבוה"; matchWidth = "95%";
   } else {
     headline = "הפורמולה שלנו יכולה לעזור — עם ציפיות ריאליסטיות";
-    match = "בינוני"; matchWidth = "55%";
+    match = "בינוני"; matchWidth = "70%";
   }
 
   const sitMap = {
