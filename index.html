@@ -153,10 +153,11 @@ const QUESTIONS = [
     {label:"18-25",value:"18-25"},{label:"26-35",value:"26-35"},{label:"36-45",value:"36-45"},{label:"46+",value:"46+"}
   ]},
   { id:"situation", question:"מה המצב שלך היום?", subtitle:"בחר את מה שהכי מתאר אותך", multi:false, options:[
-    {label:"רק התחלתי לשים לב לדלילות",value:"early",score:3},
-    {label:"נסיגה בקו השיער",value:"receding",score:3},
-    {label:"שיער דליל באזור הקודקוד",value:"thinning_crown",score:2},
-    {label:"כמעט קרחת",value:"almost_bald",score:1},
+    {label:"רק התחלתי לשים לב לשינוי",value:"early",score:3},
+    {label:"השיער נהיה דליל יותר",value:"thinning",score:3},
+    {label:"קצת מפרצים וקצת דלילות בקודקוד",value:"receding_light",score:3},
+    {label:"מפרצים רציניים או קרחת בקודקוד",value:"receding_serious",score:2},
+    {label:"כל השיער דליל, כמעט קרחת",value:"almost_bald",score:1},
     {label:"קרחת חלקה לחלוטין, אין שיער באזור",value:"fully_bald",disqualify:true}
   ]},
   { id:"duration", question:"מתי התחלת לשים לב לשינוי?", subtitle:"", multi:false, options:[
@@ -267,7 +268,6 @@ function toggleMulti(index, value) {
     if (multiSelect.includes(value)) multiSelect = multiSelect.filter(v => v !== value);
     else multiSelect.push(value);
   }
-  // Update UI
   QUESTIONS[step].options.forEach((opt, i) => {
     const btn = document.getElementById("opt" + i);
     const chk = document.getElementById("chk" + i);
@@ -335,10 +335,11 @@ function showResult() {
   }
 
   const sitMap = {
-    early: "שמת לב לשינוי מוקדם, וזה בדיוק הזמן לפעול — הזקיקים עדיין פעילים והסיכוי לתוצאות מהירות הוא הכי גבוה.",
-    receding: "נסיגה בקו השיער מגיבה מצוין לטיפול כשמתחילים בזמן, ואתה בדיוק בנקודה הזו.",
-    thinning_crown: "דלילות בקודקוד היא אחד האזורים שהכי מגיבים לטיפול מקומי, אז המצב שלך מתאים במיוחד.",
-    almost_bald: "במצב מתקדם יותר, הטיפול יכול לעצור את ההתקרחות ולשפר צפיפות — אבל חשוב שתדע שזה דורש סבלנות ועקביות, והתוצאות ייקחו יותר זמן."
+    early: "תפסת את זה בזמן הכי טוב — הזקיקים עדיין חזקים ופעילים, ועם טיפול עכשיו יש סיכוי אמיתי להחזיר את השיער למצב הכי טוב שהוא היה. זו בדיוק הנקודה שבה רואים תוצאות הכי מהר.",
+    thinning: "דלילות היא סימן שהזקיקים עדיין פעילים אבל נחלשים — וזה בדיוק המצב שבו טיפול מקומי עם מרכיבים פעילים נותן את התוצאות הכי טובות.",
+    receding_light: "מפרצים קלים ודלילות בהתחלה — זה השלב שבו אפשר לעצור את התהליך ולהחזיר צפיפות. רוב הלקוחות שלנו התחילו בדיוק מהנקודה הזו.",
+    receding_serious: "גם במצב מתקדם יותר, הטיפול יכול לעצור את הנסיגה ולשפר צפיפות באזורים שהשיער עדיין קיים בהם. זה דורש עקביות, אבל התוצאות שווות את זה.",
+    almost_bald: "במצב מתקדם, הטיפול יכול לעזור — אבל התוצאות משתנות מאדם לאדם. לפני שאתה מבצע רכישה, מומלץ לדבר איתנו כדי שנבין ביחד אם הפורמולה באמת מתאימה למצב שלך."
   };
 
   let triedKey = "other";
@@ -376,14 +377,12 @@ function showResult() {
     <p class="guarantee">✦ 90 ימי התנסות עם אחריות מלאה להחזר כספי</p>
   `);
 
-  // Animate match bar
   setTimeout(() => {
     const fill = document.getElementById("matchFill");
     if (fill) fill.style.width = matchWidth;
   }, 300);
 }
 
-// Start
 showWelcome();
 </script>
 </body>
