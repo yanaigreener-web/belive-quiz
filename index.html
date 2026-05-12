@@ -2067,6 +2067,7 @@ document.querySelectorAll('.faq-item').forEach(item => {
 
 // =========== QUIZ LOGIC ===========
 const FORM_ENDPOINT = 'https://formspree.io/f/xpqbbojo';
+const SHEETS_ENDPOINT = 'https://script.google.com/macros/s/AKfycby6FHTvexOQk-M3sTmnvbyyAAiP6p9lS-m92b2Gx0oIVzn3ITkww1j0hKUXTqVYlQ3AQQ/exec';
 
 const QUESTIONS = [
   {
@@ -2098,7 +2099,7 @@ const QUESTIONS = [
     ],
     thinning: [
       { label: 'השיער שלי רק דליל, לא מקריח', value: 'thinning_only', score: 3 },
-      { label: 'השיער שלי גם דליל', value: 'thinning_also', score: 2 },
+      { label: 'השיער שלי רק מקריח', value: 'balding_only', score: 2 },
       { label: 'השיער שלי גם דליל וגם מקריח בשלב שבחרתי', value: 'thinning_and_balding', score: 2 }
     ]
   },
@@ -2503,11 +2504,22 @@ async function submitLead(event) {
   if (typeof fbq !== 'undefined') fbq('track', 'Lead');
 
   try {
-    await fetch(FORM_ENDPOINT, {
+    // Send to Formspree (email) and Google Sheets in parallel
+    const formspreeReq = fetch(FORM_ENDPOINT, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify(data)
     });
+
+    // Google Sheets via form-encoded (avoids CORS preflight)
+    const sheetsParams = new URLSearchParams();
+    Object.entries(data).forEach(([k, v]) => sheetsParams.append(k, v));
+    const sheetsReq = fetch(SHEETS_ENDPOINT, {
+      method: 'POST',
+      body: sheetsParams
+    });
+
+    await Promise.allSettled([formspreeReq, sheetsReq]);
   } catch (e) {
     console.error('Submit error:', e);
   }
