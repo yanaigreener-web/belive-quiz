@@ -1727,7 +1727,8 @@ html.a11y-contrast body, html.a11y-contrast body * {
 }
 html.a11y-contrast a, html.a11y-contrast button { color: #ffeb3b !important; }
 html.a11y-contrast img { filter: grayscale(1) contrast(1.2); }
-html.a11y-grayscale body { filter: grayscale(1); }
+html.a11y-grayscale body > *:not(.a11y-toggle):not(.a11y-panel):not(.legal-modal-overlay) { filter: grayscale(1); }
+html.a11y-grayscale .sticky-cta { filter: grayscale(1); }
 html.a11y-links a { text-decoration: underline !important; font-weight: 700 !important; outline: 1px dashed currentColor; }
 html.a11y-no-motion *, html.a11y-no-motion *::before, html.a11y-no-motion *::after {
   animation-duration: 0.001s !important; animation-iteration-count: 1 !important;
