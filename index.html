@@ -1671,6 +1671,135 @@ section {
 .clinic-photos figcaption { font-size:13px; text-align:center; margin-top:10px; color:var(--ink); opacity:0.85; font-weight:600; }
 @media (max-width: 480px) { .clinic-photos { gap:12px; margin-bottom:24px; } .clinic-photos figcaption { font-size:12px; margin-top:8px; } }
 
+
+.consent-field { display: flex; align-items: flex-start; gap: 10px; margin: 8px 0 4px; font-size: 13.5px; line-height: 1.55; }
+.consent-field input[type="checkbox"] { margin-top: 3px; width: 18px; height: 18px; flex-shrink: 0; cursor: pointer; accent-color: var(--ink); }
+.consent-field label { cursor: pointer; color: var(--ink); opacity: 0.92; }
+.consent-field a { color: var(--ink); text-decoration: underline; font-weight: 600; }
+
+/* ===== Accessibility Widget ===== */
+.a11y-toggle {
+  position: fixed; bottom: 20px; right: 20px; z-index: 9999;
+  width: 52px; height: 52px; border-radius: 50%;
+  background: #1A4D8F; color: #fff; border: 3px solid #fff;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  font-size: 26px; padding: 0; transition: transform 0.2s;
+}
+.a11y-toggle:hover, .a11y-toggle:focus { transform: scale(1.06); outline: 3px solid #F5C518; }
+.a11y-panel {
+  position: fixed; bottom: 84px; right: 20px; z-index: 9999;
+  width: 280px; max-width: calc(100vw - 40px);
+  background: #fff; border: 2px solid #1A1A2E; border-radius: 14px;
+  box-shadow: 0 12px 36px rgba(0,0,0,0.25);
+  padding: 16px; display: none; font-family: 'Rubik', sans-serif;
+  direction: rtl; text-align: right;
+}
+.a11y-panel.open { display: block; }
+.a11y-panel h3 { font-size: 16px; font-weight: 700; margin: 0 0 12px; color: #1A1A2E; padding-bottom: 8px; border-bottom: 1.5px solid #eee; }
+.a11y-panel button.a11y-opt {
+  display: flex; width: 100%; align-items: center; gap: 10px;
+  padding: 9px 12px; margin-bottom: 6px;
+  background: #f7f7f5; border: 1.5px solid #e5e5e5; border-radius: 8px;
+  cursor: pointer; font-family: inherit; font-size: 14px; color: #1A1A2E;
+  text-align: right; transition: all 0.15s;
+}
+.a11y-panel button.a11y-opt:hover { background: #ebebe8; border-color: #1A1A2E; }
+.a11y-panel button.a11y-opt.active { background: #1A1A2E; color: #fff; border-color: #1A1A2E; }
+.a11y-panel .a11y-icon { font-size: 18px; }
+.a11y-panel .a11y-reset {
+  width: 100%; padding: 9px; margin-top: 8px;
+  background: #fff; color: #c0392b; border: 1.5px solid #c0392b;
+  border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 13px;
+}
+.a11y-panel .a11y-reset:hover { background: #c0392b; color: #fff; }
+.a11y-panel .a11y-statement-link {
+  display: block; text-align: center; margin-top: 10px;
+  font-size: 12.5px; color: #1A4D8F; text-decoration: underline;
+}
+
+/* Applied accessibility states */
+html.a11y-font-lg, html.a11y-font-lg body { font-size: 18px !important; }
+html.a11y-font-xl, html.a11y-font-xl body { font-size: 20px !important; }
+html.a11y-contrast body, html.a11y-contrast body * {
+  background-color: #000 !important; color: #fff !important;
+  border-color: #fff !important;
+}
+html.a11y-contrast a, html.a11y-contrast button { color: #ffeb3b !important; }
+html.a11y-contrast img { filter: grayscale(1) contrast(1.2); }
+html.a11y-grayscale body { filter: grayscale(1); }
+html.a11y-links a { text-decoration: underline !important; font-weight: 700 !important; outline: 1px dashed currentColor; }
+html.a11y-no-motion *, html.a11y-no-motion *::before, html.a11y-no-motion *::after {
+  animation-duration: 0.001s !important; animation-iteration-count: 1 !important;
+  transition-duration: 0.001s !important; scroll-behavior: auto !important;
+}
+html.a11y-big-cursor, html.a11y-big-cursor * { cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><polygon points='2,2 2,28 10,20 14,30 18,28 14,18 24,18' fill='black' stroke='white' stroke-width='1.5'/></svg>") 2 2, auto !important; }
+
+@media (max-width: 480px) {
+  .a11y-toggle { width: 46px; height: 46px; font-size: 22px; bottom: 16px; right: 16px; }
+  .a11y-panel { bottom: 72px; right: 16px; width: 260px; }
+}
+
+/* ===== Legal Modals ===== */
+.legal-modal-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.65);
+  z-index: 10000; display: none; opacity: 0;
+  transition: opacity 0.25s ease;
+  overflow-y: auto; padding: 24px 12px;
+}
+.legal-modal-overlay.open { display: block; opacity: 1; }
+.legal-modal {
+  max-width: 720px; margin: 0 auto; background: #FAFAF7;
+  border: 3px solid #1A1A2E; border-radius: 14px;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.4);
+  padding: 0; position: relative;
+  font-family: 'Rubik', sans-serif;
+  direction: rtl; text-align: right;
+  color: #1A1A2E;
+}
+.legal-modal-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 18px 22px; border-bottom: 2px solid #1A1A2E;
+  background: linear-gradient(135deg, #1A1A2E 0%, #16213E 100%);
+  color: #fff; border-radius: 11px 11px 0 0;
+}
+.legal-modal-title { font-weight: 800; font-size: 18px; }
+.legal-modal-close {
+  background: rgba(255,255,255,0.15); color: #fff; border: 1.5px solid rgba(255,255,255,0.4);
+  width: 34px; height: 34px; border-radius: 50%; cursor: pointer;
+  font-size: 18px; line-height: 1; padding: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.legal-modal-close:hover { background: rgba(255,255,255,0.3); }
+.legal-modal-body {
+  padding: 28px 26px; line-height: 1.75; font-size: 15.5px;
+  max-height: calc(100vh - 180px); overflow-y: auto;
+}
+.legal-modal-body h1 { font-size: 26px; font-weight: 800; margin-bottom: 6px; line-height: 1.25; }
+.legal-modal-body .meta { color: #6b6b6b; font-size: 13px; margin-bottom: 24px; }
+.legal-modal-body h2 { font-size: 19px; font-weight: 700; margin: 28px 0 12px; color: #1A1A2E; }
+.legal-modal-body h3 { font-size: 16px; font-weight: 600; margin: 18px 0 8px; color: #1A1A2E; }
+.legal-modal-body p { margin-bottom: 12px; }
+.legal-modal-body ul, .legal-modal-body ol { margin: 0 22px 14px 0; }
+.legal-modal-body li { margin-bottom: 6px; }
+.legal-modal-body strong { font-weight: 600; }
+.legal-modal-body a { color: #2D7D6E; }
+.legal-modal-body .note {
+  background: #fff; border: 2px solid #1A1A2E; border-radius: 10px;
+  padding: 14px 18px; margin: 18px 0; box-shadow: 3px 3px 0 #1A1A2E;
+}
+.legal-modal-body .note p:last-child { margin-bottom: 0; }
+.legal-modal-body .warn {
+  background: #FFF9E6; border: 2px solid #F5C518; border-radius: 10px;
+  padding: 14px 18px; margin: 18px 0;
+}
+.legal-modal-body .wrap { max-width: none; margin: 0; padding: 0; }
+@media (max-width: 480px) {
+  .legal-modal-overlay { padding: 12px 6px; }
+  .legal-modal-body { padding: 22px 18px; font-size: 14.5px; max-height: calc(100vh - 140px); }
+  .legal-modal-body h1 { font-size: 22px; }
+  .legal-modal-body h2 { font-size: 17px; }
+}
 </style>
 </head>
 <body>
@@ -2036,7 +2165,7 @@ section {
     <p><strong>BeLive Hair</strong> — קליניקה רפואית-אסתטית, נתניה</p>
     <p>© 2026 כל הזכויות שמורות</p>
     <p style="margin-top: 8px;">
-      <a href="#">מדיניות פרטיות</a> · <a href="#">תנאי שימוש</a> · <a href="#">הצהרת נגישות</a>
+      <a href="#" onclick="openLegalModal('modalPrivacy'); return false;">מדיניות פרטיות</a> · <a href="#" onclick="openLegalModal('modalTerms'); return false;">תנאי שימוש</a> · <a href="#" onclick="openLegalModal('modalA11y'); return false;">הצהרת נגישות</a>
     </p>
     <p style="margin-top: 10px; font-size: 11px;">
       הטיפול הוא תכשיר רפואי במרשם רופא בלבד. השימוש כפוף להוראות הרופא המטפל. אין לראות במידע שבדף זה ייעוץ רפואי.
@@ -2477,6 +2606,11 @@ function renderLeadForm() {
           <input type="email" id="leadEmail" name="email" placeholder="israel@gmail.com" required>
         </div>
 
+                <div class="consent-field">
+          <input type="checkbox" id="leadConsent" name="consent" required>
+          <label for="leadConsent">קראתי ואני מאשר/ת את <a href="#" onclick="openLegalModal('modalPrivacy'); return false;">מדיניות הפרטיות</a> ואת <a href="#" onclick="openLegalModal('modalTerms'); return false;">תנאי השימוש</a>.</label>
+        </div>
+
         <button type="submit" class="btn btn-primary" style="margin-top:6px;">
           שלח פרטים — קבל שיחה →
         </button>
@@ -2562,6 +2696,354 @@ function closeQuizModal() {
 // Close modal on Escape key
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') closeQuizModal();
+});
+</script>
+
+
+<!-- Accessibility Widget -->
+<button class="a11y-toggle" id="a11yToggle" aria-label="פתח תפריט נגישות" aria-expanded="false">♿</button>
+<div class="a11y-panel" id="a11yPanel" role="dialog" aria-label="תפריט נגישות">
+  <h3>תפריט נגישות</h3>
+  <button class="a11y-opt" data-action="font-lg"><span class="a11y-icon">🔍</span> הגדל טקסט</button>
+  <button class="a11y-opt" data-action="font-xl"><span class="a11y-icon">🔎</span> הגדלה מקסימלית</button>
+  <button class="a11y-opt" data-action="contrast"><span class="a11y-icon">◐</span> ניגודיות גבוהה</button>
+  <button class="a11y-opt" data-action="grayscale"><span class="a11y-icon">⚪</span> גווני אפור</button>
+  <button class="a11y-opt" data-action="links"><span class="a11y-icon">🔗</span> הדגש קישורים</button>
+  <button class="a11y-opt" data-action="no-motion"><span class="a11y-icon">⏸</span> בטל אנימציות</button>
+  <button class="a11y-opt" data-action="big-cursor"><span class="a11y-icon">➤</span> סמן גדול</button>
+  <button class="a11y-reset" id="a11yReset">איפוס נגישות</button>
+  <a href="#" class="a11y-statement-link" onclick="openLegalModal('modalA11y'); return false;">הצהרת נגישות מלאה →</a>
+</div>
+<script>
+(function(){
+  var toggle = document.getElementById('a11yToggle');
+  var panel = document.getElementById('a11yPanel');
+  var resetBtn = document.getElementById('a11yReset');
+  var opts = document.querySelectorAll('.a11y-opt');
+  var html = document.documentElement;
+  var STORAGE_KEY = 'a11y_prefs_v1';
+
+  function loadPrefs(){
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return [];
+      return JSON.parse(raw) || [];
+    } catch(e){ return []; }
+  }
+  function savePrefs(arr){
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(arr)); } catch(e){}
+  }
+  function applyClass(action, on){
+    html.classList.toggle('a11y-' + action, on);
+    // Mutually exclusive: font-lg and font-xl
+    if (on && action === 'font-lg') html.classList.remove('a11y-font-xl');
+    if (on && action === 'font-xl') html.classList.remove('a11y-font-lg');
+  }
+  function refreshButtons(prefs){
+    opts.forEach(function(b){
+      var a = b.getAttribute('data-action');
+      b.classList.toggle('active', prefs.indexOf(a) !== -1);
+    });
+  }
+
+  // Restore on load
+  var prefs = loadPrefs();
+  prefs.forEach(function(a){ applyClass(a, true); });
+  refreshButtons(prefs);
+
+  toggle.addEventListener('click', function(){
+    var open = panel.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open);
+  });
+
+  opts.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var action = btn.getAttribute('data-action');
+      var current = loadPrefs();
+      var idx = current.indexOf(action);
+      if (idx === -1){
+        // Handle mutual exclusivity in stored prefs
+        if (action === 'font-lg') current = current.filter(function(x){return x !== 'font-xl';});
+        if (action === 'font-xl') current = current.filter(function(x){return x !== 'font-lg';});
+        current.push(action);
+        applyClass(action, true);
+      } else {
+        current.splice(idx, 1);
+        applyClass(action, false);
+      }
+      savePrefs(current);
+      refreshButtons(current);
+    });
+  });
+
+  resetBtn.addEventListener('click', function(){
+    var current = loadPrefs();
+    current.forEach(function(a){ applyClass(a, false); });
+    savePrefs([]);
+    refreshButtons([]);
+  });
+
+  // Close on outside click
+  document.addEventListener('click', function(e){
+    if (!panel.contains(e.target) && e.target !== toggle && panel.classList.contains('open')){
+      panel.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+})();
+</script>
+
+
+<!-- ============ Legal Modals ============ -->
+<div class="legal-modal-overlay" id="modalPrivacy" onclick="if(event.target===this) closeLegalModal('modalPrivacy')">
+  <div class="legal-modal" role="dialog" aria-labelledby="modalPrivacyTitle">
+    <div class="legal-modal-header">
+      <span class="legal-modal-title" id="modalPrivacyTitle">מדיניות פרטיות</span>
+      <button class="legal-modal-close" aria-label="סגור" onclick="closeLegalModal('modalPrivacy')">✕</button>
+    </div>
+    <div class="legal-modal-body"><div class="wrap">
+
+    <h1>מדיניות פרטיות</h1>
+    <p class="meta">עודכן לאחרונה: יוני 2026</p>
+
+    <p>אנו ב-BeLive Hair (להלן: "החברה", "אנחנו") מכבדים את פרטיותך ומחויבים להגן על המידע האישי שאת/ה מספק/ת לנו. מדיניות זו מסבירה איזה מידע נאסף, כיצד אנו משתמשים בו, ומה הזכויות שלך לפי החוק. השימוש באתר מהווה הסכמתך לתנאי מדיניות זו.</p>
+
+    <h2>1. מי אנחנו</h2>
+    <p>האתר מופעל על-ידי <strong>ט.אמ.אי ונצ'רס בע"מ, ח.פ. 514398072</strong>, מרפאה רפואית-אסתטית הפועלת בנתניה, ישראל. ניתן ליצור עמנו קשר בכתובת <strong>רחוב המלאכה 4, נתניה</strong>, טלפון <strong>050-7338873</strong>, דוא"ל <strong>info@belive-clinics.com</strong>.</p>
+
+    <h2>2. איזה מידע אנו אוספים</h2>
+
+    <h3>2.1 מידע שאת/ה מוסר/ת לנו ביוזמתך</h3>
+    <ul>
+      <li><strong>פרטי קשר:</strong> שם מלא, מספר טלפון, כתובת דוא"ל.</li>
+      <li><strong>תשובות לשאלון הבריאות:</strong> מידע על מצב נשירת השיער, גיל, היסטוריה רפואית רלוונטית, טיפולים קודמים, ומידע נוסף שתבחר/י למסור.</li>
+      <li><strong>תקשורת עמנו:</strong> תוכן ההתכתבויות, שיחות טלפון או הודעות בערוצי הצ'אט.</li>
+    </ul>
+
+    <h3>2.2 מידע שנאסף אוטומטית</h3>
+    <ul>
+      <li><strong>נתוני שימוש:</strong> כתובת IP, סוג דפדפן ומערכת הפעלה, זמני גלישה, דפים שנצפו, מקור ההפניה.</li>
+      <li><strong>קובצי Cookies (עוגיות):</strong> אנו עושים שימוש בעוגיות לצורך תפעול תקין של האתר, ניתוח שימוש, ושיווק. ראה סעיף 6 להלן.</li>
+      <li><strong>פיקסל של Meta (פייסבוק/אינסטגרם):</strong> לצרכי מדידה ופרסום ממוקד. ראה סעיף 4.3.</li>
+    </ul>
+
+    <h2>3. למה אנו משתמשים במידע</h2>
+    <ul>
+      <li>יצירת קשר עמך בעקבות פנייתך באתר, על-ידי נציג שירות או רופא מטעם המרפאה.</li>
+      <li>בחינה ראשונית של התאמתך לטיפול בהתבסס על תשובותיך לשאלון.</li>
+      <li>מתן ייעוץ רפואי וקיום שיחת התאמה.</li>
+      <li>שיפור השירות והאתר, מענה לפניות וטיפול בבקשות.</li>
+      <li>דיוור ישיר ומשלוח חומרי שיווק — בכפוף להסכמתך המפורשת ובהתאם לחוק התקשורת (בזק ושידורים), התשמ"ב-1982. ניתן להסיר את עצמך מרשימת הדיוור בכל עת.</li>
+      <li>עמידה בחובות חוקיות ורגולטוריות.</li>
+    </ul>
+
+    <h2>4. שיתוף מידע עם צדדים שלישיים</h2>
+    <p>איננו מוכרים ואיננו משכירים את המידע האישי שלך. שיתוף מידע מוגבל למקרים הבאים:</p>
+
+    <h3>4.1 אנשי הצוות הרפואי</h3>
+    <p>רופאים ונציגי שירות במרפאה הנדרשים לטפל בפנייתך וליצור עמך קשר.</p>
+
+    <h3>4.2 ספקי שירות</h3>
+    <p>גופים המספקים לנו שירותי אחסון, ניתוח, CRM, דיוור או שירותים נלווים — בכפוף להסכמי סודיות ואבטחת מידע.</p>
+
+    <h3>4.3 פלטפורמות פרסום וניתוח</h3>
+    <p>מידע אנונימי לרוב עשוי להיות משותף עם פלטפורמות כגון Meta (Facebook/Instagram) ו-Google לצורך מדידת ביצועי פרסום וטרגוט. את/ה יכול/ה לבטל את עצמך מהשימוש לצורכי שיווק דרך הגדרות החשבון שלך בפלטפורמות אלו.</p>
+
+    <h3>4.4 דרישות חוקיות</h3>
+    <p>במידה ונידרש על-פי חוק, צו שיפוטי או דרישה של רשות מוסמכת.</p>
+
+    <h2>5. אבטחת מידע</h2>
+    <p>אנו נוקטים באמצעי אבטחה סבירים לשמירה על המידע — לרבות הצפנה בהעברה (HTTPS), הגבלת גישה לעובדים מורשים בלבד, ושמירה על נהלים בהתאם לתקנות הגנת הפרטיות (אבטחת מידע), התשע"ז-2017. עם זאת, אין באפשרותנו להבטיח אבטחה מוחלטת, ובהעברת מידע באינטרנט קיים סיכון מובנה.</p>
+
+    <h2>6. עוגיות (Cookies)</h2>
+    <p>האתר עושה שימוש בעוגיות לצורך:</p>
+    <ul>
+      <li><strong>עוגיות הכרחיות:</strong> תפעול בסיסי של האתר ושמירת העדפות.</li>
+      <li><strong>עוגיות ניתוח:</strong> הבנת אופן השימוש באתר ושיפורו.</li>
+      <li><strong>עוגיות שיווק:</strong> פיקסל של Meta ושירותים דומים לצורך טרגוט ומדידת קמפיינים.</li>
+    </ul>
+    <p>ניתן לחסום עוגיות דרך הגדרות הדפדפן, אך הדבר עלול לפגוע בחוויית השימוש.</p>
+
+    <h2>7. הזכויות שלך</h2>
+    <p>לפי <strong>חוק הגנת הפרטיות, התשמ"א-1981</strong>, עומדות לך הזכויות הבאות:</p>
+    <ul>
+      <li><strong>זכות עיון</strong> — לבקש לעיין במידע השמור עליך.</li>
+      <li><strong>זכות תיקון</strong> — לבקש לתקן מידע שגוי או לא מדויק.</li>
+      <li><strong>זכות מחיקה</strong> — לבקש את מחיקת המידע, בכפוף לחובות חוקיות אחרות (כגון שמירת רשומות רפואיות).</li>
+      <li><strong>הסרה מדיוור</strong> — להסיר את עצמך מרשימות הדיוור בכל עת באמצעות לחיצה על קישור ההסרה בכל הודעה, או בפנייה אלינו ישירות.</li>
+    </ul>
+    <p>למימוש הזכויות יש לפנות אלינו בכתב לכתובת המופיעה בסעיף 1 או בסעיף 10.</p>
+
+    <h2>8. שמירת מידע</h2>
+    <p>אנו שומרים את המידע למשך הזמן הנדרש למתן השירות ולעמידה בחובות חוקיות. מידע רפואי נשמר בהתאם להוראות הדין החל על מתן שירות רפואי. בתום תקופת השמירה, המידע יימחק או יעבור אנונימיזציה.</p>
+
+    <h2>9. קטינים</h2>
+    <p>השירות מיועד לבגירים בלבד (18+). איננו אוספים ביודעין מידע אישי מקטינים. אם נתברר כי נמסר לנו מידע על קטין ללא הסכמת הורה, נמחק את המידע מיד.</p>
+
+    <h2>10. שינויים במדיניות</h2>
+    <p>אנו רשאים לעדכן מדיניות זו מעת לעת. תאריך העדכון האחרון מופיע בראש הדף. שימוש מתמשך באתר לאחר העדכון מהווה הסכמה לתנאים המעודכנים.</p>
+
+    <h2>11. יצירת קשר</h2>
+    <div class="note">
+      <p>לכל שאלה, בקשה או תלונה בנוגע למדיניות הפרטיות, ניתן לפנות אלינו:</p>
+      <p><strong>BeLive Hair</strong><br>
+      כתובת: רחוב המלאכה 4, נתניה<br>
+      טלפון: 050-7338873<br>
+      דוא"ל: info@belive-clinics.com</p>
+    </div>
+
+    <p>בכל הנוגע לטענות הנוגעות להגנת הפרטיות, ניתן לפנות גם לרשות להגנת הפרטיות במשרד המשפטים, באתר <a href="https://www.gov.il/he/departments/the_privacy_protection_authority" target="_blank" rel="noopener">www.gov.il</a>.</p>
+
+  </div></div>
+  </div>
+</div>
+
+<div class="legal-modal-overlay" id="modalTerms" onclick="if(event.target===this) closeLegalModal('modalTerms')">
+  <div class="legal-modal" role="dialog" aria-labelledby="modalTermsTitle">
+    <div class="legal-modal-header">
+      <span class="legal-modal-title" id="modalTermsTitle">תנאי שימוש</span>
+      <button class="legal-modal-close" aria-label="סגור" onclick="closeLegalModal('modalTerms')">✕</button>
+    </div>
+    <div class="legal-modal-body"><div class="wrap">
+
+    <h1>תנאי שימוש</h1>
+    <p class="meta">עודכן לאחרונה: יוני 2026</p>
+
+    <p>ברוכים הבאים לאתר BeLive Hair. השימוש באתר זה כפוף לתנאים המפורטים להלן. הגלישה באתר ו/או השארת פרטים באמצעותו מהווים הסכמתך לתנאים אלו. אם אינך מסכים/ה לתנאים — אנא הימנע/י משימוש באתר.</p>
+
+    <h2>1. מהות האתר והשירות</h2>
+    <p>האתר משמש לאספקת מידע על שירותי המרפאה ולקבלת פניות ראשוניות ממתעניינים. השארת פרטים באתר (לרבות מילוי שאלון ההתאמה) הינה <strong>בקשה לקבלת מידע ויצירת קשר על-ידי הצוות הרפואי</strong>, ואינה מהווה רכישה, התחייבות לקבלת טיפול, או יצירת יחסי מטפל-מטופל.</p>
+
+    <h2>2. הצהרת מידע רפואי</h2>
+    <div class="warn">
+      <p><strong>חשוב לקרוא:</strong></p>
+      <p>המידע באתר מסופק לצרכים אינפורמטיביים בלבד <strong>ואינו מהווה תחליף לייעוץ רפואי, אבחנה או טיפול</strong>. אין להסתמך על המידע שבאתר לצורך קבלת החלטות רפואיות. כל החלטה הנוגעת למצבך הרפואי תתקבל לאחר ייעוץ עם רופא מוסמך, במסגרת שיחה רפואית או פגישה אישית.</p>
+      <p>הטיפול עליו מדובר באתר הינו <strong>תכשיר רפואי במרשם רופא בלבד</strong>. רכישת התכשיר ושימוש בו כפופים לאישור רופא מטפל, בכפוף להוראות הדין החל ולהתוויות נגד אישיות.</p>
+    </div>
+
+    <h2>3. דיוק המידע ואחריות המשתמש</h2>
+    <ul>
+      <li>בהשארת פרטיך באתר, את/ה מצהיר/ה שהמידע שמסרת נכון ומדויק.</li>
+      <li>מסירת מידע רפואי שגוי או חלקי בשאלון או בשיחה הרפואית עשויה להשפיע על ההתאמה לטיפול ועל בטיחותו.</li>
+      <li>השירות מיועד לבגירים (18+) בלבד.</li>
+    </ul>
+
+    <h2>4. אין הבטחת תוצאות</h2>
+    <p>למרות שהטיפול מבוסס על חומרים פעילים מוכחים קלינית, יעילותו אצל כל אדם תלויה במכלול של גורמים אישיים — לרבות שלב הנשירה, גיל, מצב רפואי כללי, התמדה בשימוש ועוד. <strong>איננו מבטיחים תוצאות זהות לכלל המשתמשים</strong>. תיאורי תוצאות, ביקורות ועדויות באתר משקפים חוויות אישיות של לקוחות ספציפיים, ואינם מהווים הבטחה לתוצאה דומה אצל כל אדם.</p>
+
+    <h2>5. הגבלת אחריות</h2>
+    <p>בכפוף להוראות כל דין, החברה לא תישא באחריות לנזק ישיר או עקיף שייגרם משימוש באתר או מהסתמכות על המידע שבו. אחריות החברה למתן הטיפול עצמו תיקבע במסגרת ההסכם הספציפי שייחתם בין המטופל לחברה במהלך שיחת הייעוץ הרפואי, וכפי שיירשם במסמכי הטיפול.</p>
+
+    <h2>6. קניין רוחני</h2>
+    <p>כל התכנים באתר — לרבות טקסטים, גרפיקה, תמונות, סרטונים, לוגואים, עיצוב וקוד — הם בבעלות החברה או מי מטעמה, ומוגנים בזכויות יוצרים ובדיני קניין רוחני אחרים. אין להעתיק, לשכפל, להפיץ או לעשות שימוש מסחרי בתכנים ללא אישור מראש ובכתב מהחברה.</p>
+
+    <h2>7. שימוש מותר</h2>
+    <p>השימוש באתר מותר למטרות אישיות ולא-מסחריות בלבד. אסור:</p>
+    <ul>
+      <li>להעתיק, לשכפל או לחקות את האתר או חלקים ממנו.</li>
+      <li>לבצע פעולות שעלולות לשבש את תפעולו או אבטחתו של האתר.</li>
+      <li>למסור פרטים של אדם אחר ללא הסכמתו.</li>
+      <li>לעשות שימוש באתר תוך הפרת כל דין.</li>
+    </ul>
+
+    <h2>8. קישורים לאתרים חיצוניים</h2>
+    <p>האתר עשוי לכלול קישורים לאתרים חיצוניים. החברה אינה אחראית לתוכן או למדיניות של אתרים אלו, ואינה מתחייבת לזמינותם.</p>
+
+    <h2>9. שינויים בתנאי השימוש ובשירות</h2>
+    <p>החברה רשאית לעדכן את תנאי השימוש ואת תוכן האתר בכל עת, ללא הודעה מוקדמת. תאריך העדכון האחרון יופיע בראש הדף. שימוש מתמשך באתר לאחר עדכון מהווה הסכמה לתנאים המעודכנים.</p>
+
+    <h2>10. הפסקת שירות</h2>
+    <p>החברה רשאית להפסיק את פעילות האתר, באופן זמני או קבוע, על-פי שיקול דעתה הבלעדי, ללא צורך בהודעה מוקדמת ומבלי שהדבר יקים למשתמש זכות לפיצוי.</p>
+
+    <h2>11. הדין החל וסמכות שיפוט</h2>
+    <p>על השימוש באתר, על מדיניות הפרטיות ועל כל מחלוקת שתתעורר בקשר אליהם — יחולו דיני מדינת ישראל בלבד. סמכות השיפוט הייחודית והבלעדית בכל עניין הקשור לאתר נתונה לבתי המשפט המוסמכים במחוז מרכז (תל-אביב).</p>
+
+    <h2>12. יצירת קשר</h2>
+    <div class="note">
+      <p><strong>BeLive Hair</strong><br>
+      ט.אמ.אי ונצ'רס בע"מ, ח.פ. 514398072<br>
+      כתובת: רחוב המלאכה 4, נתניה<br>
+      טלפון: 050-7338873<br>
+      דוא"ל: info@belive-clinics.com</p>
+    </div>
+
+  </div></div>
+  </div>
+</div>
+
+<div class="legal-modal-overlay" id="modalA11y" onclick="if(event.target===this) closeLegalModal('modalA11y')">
+  <div class="legal-modal" role="dialog" aria-labelledby="modalA11yTitle">
+    <div class="legal-modal-header">
+      <span class="legal-modal-title" id="modalA11yTitle">הצהרת נגישות</span>
+      <button class="legal-modal-close" aria-label="סגור" onclick="closeLegalModal('modalA11y')">✕</button>
+    </div>
+    <div class="legal-modal-body"><div class="wrap">
+
+    <h1>הצהרת נגישות</h1>
+    <p class="meta">עודכן לאחרונה: יוני 2026</p>
+
+    <h2>הצהרה כללית</h2>
+    <p>אנו ב-BeLive Hair רואים חשיבות עליונה במתן שירות שוויוני לכלל הציבור, ובכלל זה לאנשים עם מוגבלות. אנו פועלים על-פי <strong>חוק שוויון זכויות לאנשים עם מוגבלות, התשנ"ח-1998</strong>, ועל-פי <strong>תקנות שוויון זכויות לאנשים עם מוגבלות (התאמות נגישות לשירות), התשע"ג-2013</strong>.</p>
+
+    <h2>נגישות האתר</h2>
+    <p>אתר זה הותאם בהתאם להוראות תקן ישראלי 5568 ולהמלצות מסמך WCAG 2.1 ברמת התאמה AA, כפי שמחויב מאתרי אינטרנט בישראל.</p>
+
+    <h2>מה הותאם באתר</h2>
+    <ul>
+      <li>האתר ניתן לניווט באמצעות מקלדת בלבד.</li>
+      <li>תאימות לקוראי מסך מובילים (NVDA, JAWS, VoiceOver).</li>
+      <li>שימוש בקונטרסט מתאים בין טקסט לרקע.</li>
+      <li>גופנים ברורים וקריאים, עם אפשרות להגדלה דרך הדפדפן (Ctrl/⌘ + פלוס).</li>
+      <li>טקסט חלופי (alt) לתמונות משמעותיות באתר.</li>
+      <li>מבנה סמנטי תקין (כותרות, רשימות, קישורים).</li>
+      <li>תיוג תקין של שדות טופס ושאלון.</li>
+      <li>תמיכה בכיווניות ימין-לשמאל (RTL) מלאה לעברית.</li>
+      <li>נקודות מיקוד (focus) ברורות בעת ניווט במקלדת.</li>
+    </ul>
+
+    <h2>חלקים שאינם נגישים במלואם</h2>
+    <p>על אף שאנו עושים כל מאמץ להנגיש את האתר בשלמותו, ייתכן שתימצא תכנים מסוימים שלא הונגשו במלואם בשל אילוצים טכניים, או שעדיין בתהליך התאמה. אנו פועלים באופן שוטף לשיפור נגישות האתר ולתיקון תקלות שיתגלו.</p>
+
+    <h2>סיוע ופניות בנושא נגישות</h2>
+    <p>במידה ונתקלת בבעיית נגישות באתר, או שאת/ה זקוק/ה לסיוע לקבלת המידע באופן נגיש — נשמח לסייע. ניתן לפנות אלינו ולציין במדויק את הבעיה או הצורך.</p>
+
+    <div class="note">
+      <p><strong>ממונה נגישות:</strong></p>
+      <p>שם: ינאי<br>
+      טלפון: 050-7338873<br>
+      דוא"ל: info@belive-clinics.com</p>
+      <p>אנו מתחייבים להגיב לכל פנייה בנושא נגישות בתוך זמן סביר, ולפעול לתיקון תקלות בהקדם האפשרי.</p>
+    </div>
+
+    <h2>נגישות במרפאה הפיזית</h2>
+    <p>המרפאה בנתניה הותאמה לאנשים עם מוגבלות בהתאם להוראות הדין. לפרטים נוספים על הסדרי הנגישות במקום, ניתן ליצור עמנו קשר טלפוני מראש.</p>
+
+    <h2>פנייה לנציב שוויון זכויות</h2>
+    <p>אם הפנייה שלך לא טופלה לשביעות רצונך, ניתן לפנות לנציבות שוויון זכויות לאנשים עם מוגבלות במשרד המשפטים:</p>
+    <ul>
+      <li>אתר: <a href="https://www.gov.il/he/departments/Topics/disability_rights" target="_blank" rel="noopener">www.gov.il</a></li>
+      <li>טלפון: *6763</li>
+    </ul>
+
+    <p class="meta" style="margin-top: 40px;">הצהרה זו תעודכן מעת לעת בהתאם לשינויים שייערכו באתר ובהתאם לשינויים בחוק.</p>
+
+  </div></div>
+  </div>
+</div>
+
+<script>
+function openLegalModal(id) {
+  var el = document.getElementById(id);
+  if (el) { el.classList.add('open'); document.body.style.overflow = 'hidden'; }
+}
+function closeLegalModal(id) {
+  var el = document.getElementById(id);
+  if (el) { el.classList.remove('open'); document.body.style.overflow = ''; }
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    ['modalPrivacy','modalTerms','modalA11y'].forEach(closeLegalModal);
+  }
 });
 </script>
 
