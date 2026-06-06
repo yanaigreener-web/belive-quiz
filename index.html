@@ -2184,7 +2184,9 @@ html.a11y-big-cursor, html.a11y-big-cursor * { cursor: url("data:image/svg+xml;u
 // Smooth scroll for in-page anchors
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', function(e) {
-    const target = document.querySelector(this.getAttribute('href'));
+    const href = this.getAttribute('href');
+    if (!href || href === '#' || href.length < 2) return;
+    const target = document.querySelector(href);
     if (target) {
       e.preventDefault();
       target.scrollIntoView({behavior: 'smooth', block: 'start'});
